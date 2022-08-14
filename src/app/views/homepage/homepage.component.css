@@ -10,6 +10,7 @@ input {
     font-size: x-large;
 }
 
+/*No Scrollbar on the homepage wanted*/
 body {
     overflow: "hidden";
 }
