@@ -15,8 +15,8 @@ footer {
     /* Make the footer stick to the bottom https://stackoverflow.com/a/689290/18718228*/
     clear: both;
     position: relative;
-    height: 10%;
-    margin-top: -10%;
+    height: 5vh;
+    margin-top: -5vh;
 
 }
 
