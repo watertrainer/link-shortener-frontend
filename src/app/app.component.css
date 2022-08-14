@@ -1,0 +1,26 @@
+.bg {
+    /* The image used */
+    /* Have to use this pathing so it respects the base-href set*/
+    background-image: url("~src/assets/background.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+footer {
+
+    clear: both;
+    position: relative;
+    height: 10%;
+    margin-top: -10%;
+
+}
+
+main {
+    height: 100%;
+}
