@@ -1,8 +1,7 @@
 .bg {
     /* The image used */
     /* Have to use this pathing so it respects the base-href set*/
-    background-image: url("~src/assets/background.jpg");
-
+    background-image: url(~src/assets/background.svg);
     /* Full height */
     height: 100%;
 
