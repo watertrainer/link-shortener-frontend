@@ -1,1 +1,40 @@
-<p>stats works!</p>
+<div class="clr-row">
+    <div class="clr-col">
+        <h1>Stats for shortl's</h1>
+    </div>
+</div>
+
+<div class="clr-row clr-offset-1">
+    <div class="clr-col-3">
+        <form clrForm [formGroup]="searchUrlForm" (ngSubmit)="getStats()">
+            <div class="clr-row">
+                <div class="clr-col">
+
+                    <clr-input-container><input required formControlName="searchUrlInput" clrInput
+                            (keydown.enter)="getStats()" placeholder="shortl" name="searchUrlInput" />
+                        <clr-control-error>{{errorMessage}}</clr-control-error>
+                    </clr-input-container>
+
+                </div>
+            </div>
+            <div class="clr-row">
+                <div class="clr-col">
+                    <div class="btn-div">
+                        <button [clrLoading]="statsBtnState" type="submit" class="btn btn-primary">Stats!</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="clr-col-3 clr-offset-2" *ngIf="succsess===true">
+        <h2>{{searchUrlForm.controls.searchUrlInput.value}}</h2>
+    </div>
+</div>
+<div class="clr-row lr-justify-content-between">
+    <div class="clr-col left-text" *ngIf="succsess===true">
+        <h3>This shortl was viewed {{viewed}} {{viewed==1?"time":"times"}}</h3>
+    </div>
+    <div class="clr-col right-text" *ngIf="succsess===true">
+        <h3>This shortl was shortened {{shortened}} {{shortened==1?"time":"times"}}</h3>
+    </div>
+</div>

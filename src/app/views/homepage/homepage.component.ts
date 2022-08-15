@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlHandlingStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -12,4 +13,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit(): void {
+    console.log("Submit");
+  }
 }
