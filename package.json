@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build": "ng build --configuration porduction --base-href /home/",
+    "watch": " ng build --watch --poll=500 --output-path ../link-shortener-backend/dist --base-href /home/ --configuration development",
     "test": "ng test"
   },
   "private": true,
