@@ -4,5 +4,8 @@ Frontend for a simple link-shortener
 1. [Install Angular](https://angular.io/guide/setup-local)
 2. [Install Clarity](https://clarity.design/documentation/get-started)
 ## Building
-To build the frontend run `ng build --base-href /home/`.  
-It is important to define the `--base-href` so that the backend serves the right files requested by Angular.
+To build the frontend run `npm run build`
+## Developing
+To continously build the frontend and watch for changes run `npm run watch`
+## Testing
+To run all unit tests run `npm run test`
