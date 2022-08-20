@@ -60,6 +60,7 @@ describe('StatsComponent', () => {
     });
     const mockResponse = { shortened: 10, viewed: 5, shortl: "test_value", url: "https://google.com" };
     backendSpy.getStats.and.returnValue(of(mockResponse))
+    spyOn(component, "statsSuccsess").and.callThrough();
     component.getStats();
     expect(backendSpy.getStats).toHaveBeenCalledOnceWith("test");
     expect(component.statsSuccsess).toHaveBeenCalledOnceWith(mockResponse);
@@ -97,5 +98,7 @@ describe('StatsComponent', () => {
     //this is the actual value given in the query params
     expect(backendSpy.getShortlStats).toHaveBeenCalledOnceWith("test");
   });
+
+
 
 });
