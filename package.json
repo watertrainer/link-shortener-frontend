@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --configuration porduction --base-href /home/",
     "watch": " ng build --watch --poll=500 --output-path ../link-shortener-backend/dist --base-href /home/ --configuration development",
-    "test": "ng test"
+    "test": "ng test --watch --poll=500"
   },
   "private": true,
   "dependencies": {
