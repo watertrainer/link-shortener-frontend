@@ -2,21 +2,27 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { BackendService } from 'src/app/services/backend.service';
 
 import { StatsComponent } from './stats.component';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { ClarityModule, ClrLoadingState } from '@clr/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
 
 describe('StatsComponent', () => {
   let component: StatsComponent;
   let fixture: ComponentFixture<StatsComponent>;
-  let backendSpy: jasmine.SpyObj<BackendService>; let statsElement: HTMLElement
+  let backendSpy: jasmine.SpyObj<BackendService>;
+  let statsElement: HTMLElement;
+  let routeSpy: jasmine.SpyObj<ActivatedRoute>;
+
 
   beforeEach(async () => {
-    backendSpy = jasmine.createSpyObj('BackendService', ['getStats']);
+    backendSpy = jasmine.createSpyObj('BackendService', ['getStats', 'getShortlStats']);
+    routeSpy = jasmine.createSpyObj('ActivatedRoute', [''], { 'queryParams': of({ shortl: undefined }) });
+
     await TestBed.configureTestingModule({
       imports: [ClarityModule, ReactiveFormsModule, BrowserAnimationsModule],
-      declarations: [StatsComponent], providers: [{ provide: BackendService, useValue: backendSpy }],
+      declarations: [StatsComponent], providers: [{ provide: BackendService, useValue: backendSpy }, { provide: ActivatedRoute, useValue: routeSpy }],
     })
       .compileComponents();
     fixture = TestBed.createComponent(StatsComponent);
@@ -48,10 +54,10 @@ describe('StatsComponent', () => {
     );
     expect(component.searchUrlForm.valid).withContext("should be valid with input").toBeTrue()
   })
-  it('should update Values on getStats', () => {
-    const mockResponse = { shortened: 10, viewed: 5, queryUrl: "test" };
-    const getStatsSpy = backendSpy.getStats.and.returnValue(of(mockResponse));
-    component.getStats();
+  it('should update Values on statsSuccsess', () => {
+    const mockResponse = { shortened: 10, viewed: 5, shortl: "test", url: "https://google.com" };
+
+    component.statsSuccsess(mockResponse);
     expect(component.viewed).withContext("should update viewed").toBe(5);
     expect(component.shortened).withContext("should update shortened").toBe(10);
     expect(component.succsess).withContext("should be succsessful").toBeTruthy();
@@ -59,16 +65,22 @@ describe('StatsComponent', () => {
     expect(component.searchUrlForm.controls.searchUrlInput.errors).withContext("should update error state").not.toBeTruthy();
   })
 
-  it("should display error on getStats", fakeAsync(() => {
+  it("should display error on statsError", () => {
     const errorMessage = "An Error has occured";
-    const getStatsSpy = backendSpy.getStats.and.returnValue(throwError(() => new Error(errorMessage)));
-    component.getStats();
+    component.statsError(new Error(errorMessage));
     expect(component.errorMessage).withContext("Should display error Message").toBe(errorMessage);
     expect(component.succsess).withContext("Should display unseccsesfull").toBeFalsy();
     expect(component.statsBtnState).withContext("Should display error on button").toBe(ClrLoadingState.ERROR);
     expect(component.searchUrlForm.controls.searchUrlInput.errors).withContext("should update error state").toBeTruthy();
-  }))
+  })
 
-})
+  it("should have shortl on call with url parameters", () => {
+    (Object.getOwnPropertyDescriptor(routeSpy, "queryParams")?.get as any).and.returnValue(of({ shortl: "test" }))
+    const mockResponse = { shortened: 10, viewed: 5, shortl: "test", url: "https://google.com" };
+    backendSpy.getShortlStats.and.returnValue(of(mockResponse))
+    component.ngOnInit();
+    expect(component.shortl).toBe("test");
+    expect(backendSpy.getShortlStats).toHaveBeenCalledOnceWith("test");
+  });
 
-  ;
+});

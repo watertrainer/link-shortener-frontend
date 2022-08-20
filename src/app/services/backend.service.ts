@@ -22,6 +22,10 @@ export class BackendService {
     }
   }
 
+  getShortlStats(shortl: string) {
+    const options = { params: new HttpParams().set("shortl", shortl) };
+    return this.http.get<responseObjectStats>(this.statsUrl, options).pipe(catchError(this.handleError));
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. 
@@ -39,5 +43,6 @@ export class BackendService {
 export interface responseObjectStats {
   viewed: number;
   shortened: number;
-  queryUrl: string;
+  shortl: string;
+  url: string;
 }

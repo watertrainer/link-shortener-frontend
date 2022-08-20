@@ -21,7 +21,7 @@ describe('BackendService', () => {
     expect(service).toBeTruthy();
   });
   it('should load on getStats', (done: DoneFn) => {
-    const expectedData = { viewed: 10, error: "", queryUrl: "test", shortened: 3 };
+    const expectedData = { viewed: 10, shortl: "asdfsdf", url: "test", shortened: 3 };
     service.getStats("test").subscribe({
       next(data: responseObjectStats) {
         expect(data).withContext("expected data").toBe(expectedData);

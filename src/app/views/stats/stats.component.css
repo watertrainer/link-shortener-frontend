@@ -10,6 +10,10 @@ input {
     display: inherit;
 }
 
+h2 {
+    text-align: center;
+}
+
 .right-text {
     text-align: right;
     padding-right: 5vw;

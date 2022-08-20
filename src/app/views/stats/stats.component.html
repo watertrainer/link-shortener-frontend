@@ -11,7 +11,7 @@
                 <div class="clr-col">
 
                     <clr-input-container><input required formControlName="searchUrlInput" clrInput
-                            (keydown.enter)="getStats()" placeholder="shortl" name="searchUrlInput" />
+                            (keydown.enter)="getStats()" placeholder="url" name="searchUrlInput" />
                         <clr-control-error>{{errorMessage}}</clr-control-error>
                     </clr-input-container>
 
@@ -26,8 +26,9 @@
             </div>
         </form>
     </div>
-    <div class="clr-col-3 clr-offset-2" *ngIf="succsess===true">
-        <h2>{{searchUrlForm.controls.searchUrlInput.value}}</h2>
+    <div class="clr-col-3 clr-offset-1" *ngIf="succsess===true">
+        <h2>{{shortl}}</h2><br>
+        <h2>{{url}}</h2>
     </div>
 </div>
 <div class="clr-row lr-justify-content-between">
