@@ -75,11 +75,15 @@ describe('StatsComponent', () => {
   })
 
   it("should have shortl on call with url parameters", () => {
+    //set the query params to our test value
     (Object.getOwnPropertyDescriptor(routeSpy, "queryParams")?.get as any).and.returnValue(of({ shortl: "test" }))
-    const mockResponse = { shortened: 10, viewed: 5, shortl: "test", url: "https://google.com" };
+    const mockResponse = { shortened: 10, viewed: 5, shortl: "test_value", url: "https://google.com" };
     backendSpy.getShortlStats.and.returnValue(of(mockResponse))
+    //read the query params again, as we changed the value of them and we read them in ngOnInit
     component.ngOnInit();
-    expect(component.shortl).toBe("test");
+    //this is now the value sent in the mock response
+    expect(component.shortl).toBe("test_value");
+    //this is the actual value given in the query params
     expect(backendSpy.getShortlStats).toHaveBeenCalledOnceWith("test");
   });
 

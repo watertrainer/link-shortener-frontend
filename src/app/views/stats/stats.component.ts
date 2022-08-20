@@ -19,15 +19,18 @@ export class StatsComponent implements OnInit {
   shortl = "";
   url = "";
   errorMessage = "";
+  host = location.host;
 
   statsBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
   constructor(private backendService: BackendService, private ref: ChangeDetectorRef, private activatedRoute: ActivatedRoute) { console.log(this.searchUrlForm) }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((value: Params) => {
 
+    this.activatedRoute.queryParams.subscribe((value: Params) => {
+      //shortl is the query params value
       this.shortl = value["shortl"];
       if (this.shortl !== undefined)
+        //if the shortl value was set, get the shortl stats from the server
         this.getShortlStats();
     });
   }
