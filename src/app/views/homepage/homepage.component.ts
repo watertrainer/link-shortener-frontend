@@ -24,7 +24,6 @@ export class HomepageComponent implements OnInit {
     this.submitBtnState = ClrLoadingState.LOADING
     this.backendService.sendShortenUrl(this.shortenUrlForm.controls.shortenUrlInput.value).subscribe(
       (data) => {
-        console.log(data);
         this.submitBtnState = ClrLoadingState.SUCCESS
         this.router.navigate(["/stats"], { queryParams: { shortl: data.shortl } });
       },
@@ -33,7 +32,6 @@ export class HomepageComponent implements OnInit {
         this.errorMessage = error.message;
         this.shortenUrlForm.controls.shortenUrlInput.setErrors({});
         this.ref.detectChanges();
-        console.log(error);
       }
     );
     console.log("Submit");
