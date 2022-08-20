@@ -29,9 +29,16 @@ export class StatsComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((value: Params) => {
       //shortl is the query params value
       this.shortl = value["shortl"];
-      if (this.shortl !== undefined)
+      if (this.shortl !== undefined) {
         //if the shortl value was set, get the shortl stats from the server
         this.getShortlStats();
+      }
+      else {
+        //reset the website to wait for a new shortl/submit
+        this.succsess = false;
+        shortl = "";
+        this.ref.detectChanges();
+      }
     });
   }
   getShortlStats(): void {
