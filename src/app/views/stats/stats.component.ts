@@ -36,7 +36,7 @@ export class StatsComponent implements OnInit {
       else {
         //reset the website to wait for a new shortl/submit
         this.succsess = false;
-        shortl = "";
+        this.shortl = "";
         this.ref.detectChanges();
       }
     });
