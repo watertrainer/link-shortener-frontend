@@ -1,13 +1,13 @@
 .btn {
     width: 100%;
     height: 100%;
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 input {
     width: 100%;
     height: 100%;
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 /*No Scrollbar on the homepage wanted*/
@@ -19,10 +19,6 @@ form {
     height: 100%;
 }
 
-h1 {
-    text-align: center;
-    font-size: 15vh;
-}
 
 .big-row {
     height: 80vh;

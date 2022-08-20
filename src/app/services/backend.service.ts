@@ -13,6 +13,7 @@ export class BackendService {
 
   constructor(private http: HttpClient) { }
   statsUrl: string = "/api/stats";
+  shortenUrl: string = "/api/shorten";
   getStats(url: string | null) {
     if (url !== null) {
       const options = { params: new HttpParams().set("url", url) }
@@ -26,6 +27,14 @@ export class BackendService {
     const options = { params: new HttpParams().set("shortl", shortl) };
     return this.http.get<responseObjectStats>(this.statsUrl, options).pipe(catchError(this.handleError));
   }
+
+  sendShortenUrl(url: string | null) {
+    if (url === null) {
+      return throwError(() => new Error("The url is required"));
+    }
+    return this.http.post<any>(this.shortenUrl, { "url": url }).pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. 

@@ -3,13 +3,17 @@
         <h1>Make big links short.</h1>
     </div>
 </div>
-<div class="big-row clr-row clr-align-items-center align-middle">
-    <div class="wat-big-col clr-col-lg-6 clr-col-md-6 clr-col-sm-6 clr-col-5 clr-offset-1 clr-offset-md-1">
-        <form clrForm>
-            <input clrInput placeholder="Enter a long Link" name="input" [(ngModel)]="input" />
-        </form>
+<form clrForm [formGroup]="shortenUrlForm" (ngSubmit)="onSubmit()">
+    <div class="big-row clr-row clr-align-items-center align-middle">
+        <div class="wat-big-col clr-col-lg-6 clr-col-md-6 clr-col-sm-6 clr-col-5 clr-offset-1 clr-offset-md-1">
+            <clr-input-container>
+                <input clrInput placeholder="Enter a long Link" name="input" required formControlName="shortenUrlInput"
+                    name="shortenUrlInput" />
+                <clr-control-error>{{errorMessage}}</clr-control-error>
+            </clr-input-container>
+        </div>
+        <div class="wat-big-col clr-col-lg-4 clr-col-md-3 clr-col-sm-2 clr-col-2 clr-offset-1 clr-offset-md-1">
+            <button [clrLoading]="submitBtnState" type="submit" class="btn btn-primary">shorten!</button>
+        </div>
     </div>
-    <div class="wat-big-col clr-col-lg-4 clr-col-md-3 clr-col-sm-2 clr-col-2 clr-offset-1 clr-offset-md-1">
-        <button class="btn btn-primary">shorten!</button>
-    </div>
-</div>
+</form>
