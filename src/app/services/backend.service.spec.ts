@@ -78,5 +78,32 @@ describe('BackendService', () => {
     httpTestingController.verify();
   })
 
+  it("should throw error on missing url for send shorten url", (done: DoneFn) => {
+    service.sendShortenUrl(null).subscribe({
+      next: data => done.fail("expected an error, not data"), error: error => {
+        expect(error.message).toContain("The url is required");
+        done();
+      }
+    })
+
+  });
+
+  it("shouls send valid request on shortenUrl request", (done: DoneFn) => {
+    const mockResponse = { shortl: "test" }
+    service.sendShortenUrl("test").subscribe({
+      next: data => {
+        expect(data).toEqual(mockResponse);
+        done()
+      }, error: error => {
+        done.fail("expected succsessful response, not error")
+      }
+    });
+    const req = httpTestingController.expectOne(service.shortenUrl);
+    expect(req.request.method).toEqual("POST");
+    expect(req.request.body).toEqual({ url: "test" });
+    req.flush(mockResponse);
+    httpTestingController.verify();
+  })
+
 
 });
