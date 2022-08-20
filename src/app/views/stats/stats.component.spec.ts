@@ -54,6 +54,17 @@ describe('StatsComponent', () => {
     );
     expect(component.searchUrlForm.valid).withContext("should be valid with input").toBeTrue()
   })
+  it('should read input form control', () => {
+    component.searchUrlForm.setValue({
+      searchUrlInput: "test"
+    });
+    const mockResponse = { shortened: 10, viewed: 5, shortl: "test_value", url: "https://google.com" };
+    backendSpy.getStats.and.returnValue(of(mockResponse))
+    component.getStats();
+    expect(backendSpy.getStats).toHaveBeenCalledOnceWith("test");
+    expect(component.statsSuccsess).toHaveBeenCalledOnceWith(mockResponse);
+
+  })
   it('should update Values on statsSuccsess', () => {
     const mockResponse = { shortened: 10, viewed: 5, shortl: "test", url: "https://google.com" };
 
